@@ -3,7 +3,6 @@
 #include "Containers/UnrealString.h"
 #include "Interfaces/IAnalyticsProvider.h"
 
-
 class FAmplitudeProvider : public IAnalyticsProvider
 {
 public:

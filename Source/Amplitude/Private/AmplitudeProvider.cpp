@@ -50,5 +50,3 @@ FString FAmplitudeProvider::GetUserID() const
 {
   return TEXT("NO-OP");
 }
-
-
