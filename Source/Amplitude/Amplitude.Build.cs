@@ -1,15 +1,16 @@
 using UnrealBuildTool;
 using System.IO;
+using Tools.DotNETCommon;
 
 public class Amplitude : ModuleRules
 {
 	public Amplitude(ReadOnlyTargetRules Target) : base(Target)
 	{
 		PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
-    string LibraryPath = Path.GetFullPath(Path.Combine(ModuleDirectory, "Source/Library"));
-		
+    string LibraryPath = Path.GetFullPath(Path.Combine(ModuleDirectory, "../Library"));
 		PublicIncludePaths.AddRange(
 			new string[] {
+        Path.Combine(LibraryPath, "iOS")
 				// ... add public include paths required here ...
 			}
 			);
