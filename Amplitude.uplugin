@@ -18,7 +18,8 @@
 		{
 			"Name": "Amplitude",
 			"Type": "Editor",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+      "WhitelistPlatforms" : [ "IOS" ]
 		}
 	]
 }

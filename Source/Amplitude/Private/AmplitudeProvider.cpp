@@ -1,6 +1,9 @@
+#include "AmplitudeProvider.h"
 #include "Containers/UnrealString.h"
 #include "Interfaces/IAnalyticsProvider.h"
-#include "AmplitudeProvider.h"
+#if PLATFORM_APPLE
+  #include "AmplitudeiOSBridge.h"
+#endif
 
 FAmplitudeProvider::FAmplitudeProvider()
 {
@@ -13,6 +16,7 @@ FAmplitudeProvider::~FAmplitudeProvider()
 
 bool FAmplitudeProvider::StartSession(const TArray<FAnalyticsEventAttribute>& Attributes)
 {
+  // ios_bridge::testEventSend();
   return true;
 }
 
