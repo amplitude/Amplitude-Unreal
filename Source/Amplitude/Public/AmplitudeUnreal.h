@@ -4,7 +4,7 @@
 #include "Modules/ModuleManager.h"
 #include "Interfaces/IAnalyticsProviderModule.h"
 
-class FAmplitudeModule : public IAnalyticsProviderModule
+class FAmplitudeUnreal : public IAnalyticsProviderModule
 {
 public:
 	
