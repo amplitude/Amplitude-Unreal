@@ -14,12 +14,21 @@
 	"IsBetaVersion": true,
 	"IsExperimentalVersion": false,
 	"Installed": false,
-	"Modules": [
+	"Modules" :
+	[
 		{
-			"Name": "Amplitude",
-			"Type": "Editor",
-			"LoadingPhase": "Default",
-      "WhitelistPlatforms" : [ "IOS" ]
+			"Name" : "AmplitudeEditor",
+			"Type" : "Editor",
+			"LoadingPhase" : "Default"
+		},
+		{
+			"Name" : "Amplitude",
+			"Type" : "Runtime",
+			"LoadingPhase" : "PreDefault",
+			"WhitelistPlatforms" :
+			[
+				"IOS"
+			]
 		}
 	]
 }
