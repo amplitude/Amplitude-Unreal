@@ -47,8 +47,8 @@ bool FAmplitudeProvider::StartSession(const TArray<FAnalyticsEventAttribute>& At
 {
   #if PLATFORM_APPLE
     std::string ConvertedApiKey = std::string(TCHAR_TO_UTF8(*ApiKey));
-    ios_bridge::AmplitudeiOSBridge bridge;
-    bridge.initializeApiKey(ConvertedApiKey);
+    ios_bridge::AmplitudeiOSBridge Bridge;
+    Bridge.initializeApiKey(ConvertedApiKey);
   #endif
   bHasSessionStarted = true;
   return bHasSessionStarted;
@@ -62,10 +62,10 @@ void FAmplitudeProvider::EndSession()
 void FAmplitudeProvider::RecordEvent(const FString& EventName, const TArray<FAnalyticsEventAttribute>& Attributes)
 {
   #if PLATFORM_APPLE
-    ios_bridge::AmplitudeiOSBridge bridge;
+    ios_bridge::AmplitudeiOSBridge Bridge;
     std::string ConvertedEventName = std::string(TCHAR_TO_UTF8(*EventName));
     UE_LOG(LogAnalytics, Display, TEXT("[Amplitude Event] %s"), *EventName);
-    bridge.logEvent(ConvertedEventName);
+    Bridge.logEvent(ConvertedEventName);
   #endif
 }
 
