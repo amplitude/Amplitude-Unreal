@@ -26,11 +26,8 @@ TSharedPtr<IAnalyticsProvider> FAmplitudeUnreal::CreateAnalyticsProvider(const F
 		const FString Key = GetConfigValue.Execute(TEXT("AmplitudeApiKey"), true);
 		return FAmplitudeProvider::Create(Key);
 	}
-	else
-	{
-		UE_LOG(LogAnalytics, Warning, TEXT("AmplitudeUnreal::CreateAnalyticsProvider was called with an unbound config delegate"));
-	}
-	return nullptr;
+  UE_LOG(LogAnalytics, Warning, TEXT("AmplitudeUnreal::CreateAnalyticsProvider was called with an unbound config delegate"));
+  return nullptr;
 }
 
 FAmplitudeProvider::FAmplitudeProvider(const FString Key) : ApiKey(Key)
