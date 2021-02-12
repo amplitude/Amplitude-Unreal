@@ -2,26 +2,52 @@
 
 #include "Containers/UnrealString.h"
 #include "Interfaces/IAnalyticsProvider.h"
+#include <string>
 
 class FAmplitudeProvider : public IAnalyticsProvider
 {
+    /** The API key for your Amplitude project */
+	FString ApiKey;
+	/** Tracks whether we need to start the session or restart it */
+	bool bHasSessionStarted;
+	/** Cached user id */
+	FString UserId;
+
+  /** Singleton for analytics */
+  static TSharedPtr<IAnalyticsProvider> AmplitudeProvider;
+
 public:
-	FAmplitudeProvider();
+  FAmplitudeProvider(const FString Key);
 	virtual ~FAmplitudeProvider();
 
-	bool StartSession(const TArray<FAnalyticsEventAttribute>& Attributes) override;
+  static TSharedPtr<IAnalyticsProvider> Create(const FString Key)
+	{
+		if (!AmplitudeProvider.IsValid())
+		{
+			AmplitudeProvider = TSharedPtr<IAnalyticsProvider>(new FAmplitudeProvider(Key));
+		}
+		return AmplitudeProvider;
+	}
 
-	void EndSession() override;
+	static void Destroy()
+	{
+		AmplitudeProvider.Reset();
+	}
 
-	void RecordEvent(const FString& EventName, const TArray<FAnalyticsEventAttribute>& Attributes) override;
 
-	FString GetSessionID() const override;
+	virtual bool StartSession(const TArray<FAnalyticsEventAttribute>& Attributes) override;
 
-	bool SetSessionID(const FString& InSessionID) override;
+	virtual void EndSession() override;
 
-	void FlushEvents() override;
+	virtual void RecordEvent(const FString& EventName, const TArray<FAnalyticsEventAttribute>& Attributes) override;
 
-	void SetUserID(const FString& InUserID) override;
+	virtual FString GetSessionID() const override;
 
-	FString GetUserID() const override;
+	virtual bool SetSessionID(const FString& InSessionID) override;
+
+	virtual void FlushEvents() override;
+
+	virtual void SetUserID(const FString& InUserID) override;
+
+	virtual FString GetUserID() const override;
 };
