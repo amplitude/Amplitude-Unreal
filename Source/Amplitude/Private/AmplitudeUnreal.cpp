@@ -67,7 +67,7 @@ void FAmplitudeProvider::RecordEvent(const FString& EventName, const TArray<FAna
   #if PLATFORM_APPLE
     ios_bridge::AmplitudeiOSBridge bridge;
     std::string ConvertedEventName = std::string(TCHAR_TO_UTF8(*EventName));
-    UE_LOG(LogAnalytics, Warning, TEXT("Amplitude event logged - %s"), *EventName);
+    UE_LOG(LogAnalytics, Display, TEXT("[Amplitude Event] %s"), *EventName);
     bridge.logEvent(ConvertedEventName);
   #endif
 }
