@@ -3,8 +3,9 @@
 The "bridge" class. All methods should defer to respective methods of objc file MyClass
 Maybe could use some helper functions
 */
-#import "Amplitude.h" // iOS header
 #import "AmplitudeiOSBridge.h" // bridge header
+// #import "Amplitude.h" // iOS header
+#import "AmplitudeIOS/include/Amplitude.h"
 #import <Foundation/Foundation.h>
 #include <string>
 
