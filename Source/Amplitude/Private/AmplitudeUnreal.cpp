@@ -8,6 +8,7 @@
 IMPLEMENT_MODULE(FAmplitudeUnreal, Amplitude)
 
 TSharedPtr<IAnalyticsProvider> FAmplitudeProvider::AmplitudeProvider;
+std::string LibraryName = "amplitude-unreal";
 
 void FAmplitudeUnreal::StartupModule()
 {
@@ -49,6 +50,7 @@ bool FAmplitudeProvider::StartSession(const TArray<FAnalyticsEventAttribute>& At
     std::string ConvertedApiKey = std::string(TCHAR_TO_UTF8(*ApiKey));
     ios_bridge::AmplitudeiOSBridge Bridge;
     Bridge.initializeApiKey(ConvertedApiKey);
+    Bridge.setLibrary(LibraryName);
   #endif
   bHasSessionStarted = true;
   return bHasSessionStarted;
@@ -81,12 +83,12 @@ bool FAmplitudeProvider::SetSessionID(const FString& InSessionID)
 
 void FAmplitudeProvider::FlushEvents()
 {
-  
+
 }
 
 void FAmplitudeProvider::SetUserID(const FString& InUserID)
 {
-  
+
 }
 
 FString FAmplitudeProvider::GetUserID() const
