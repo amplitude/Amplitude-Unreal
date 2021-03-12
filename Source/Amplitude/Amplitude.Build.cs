@@ -12,7 +12,7 @@ public class Amplitude : ModuleRules
     Log.TraceInformation("In Amplitude.Build.cs");
     Log.TraceInformation(LibraryPath);
     Log.TraceInformation(ModuleDirectory);
-    if (Target.Platform == UnrealTargetPlatform.Mac)
+    if (Target.Platform == UnrealTargetPlatform.IOS)
     {
       PrivateIncludePaths.AddRange(
         new string[] {
