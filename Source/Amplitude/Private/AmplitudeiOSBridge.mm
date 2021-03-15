@@ -4,17 +4,11 @@ The "bridge" class. All methods should defer to respective methods of objc file 
 Maybe could use some helper functions
 */
 #import "AmplitudeiOSBridge.h" // bridge header
-// #import "Amplitude.h" // iOS header
-#import "AmplitudeIOS/include/Amplitude.h"
+#import "AmplitudeIOS/include/Amplitude.h" // iOS header
 #import <Foundation/Foundation.h>
 #include <string>
 
 namespace ios_bridge {
-
-  // struct AmplitudeImpl
-  // {
-  //   Amplitude *wrapped;
-  // };
 
   NSString* convert(const std::string& str)
   {

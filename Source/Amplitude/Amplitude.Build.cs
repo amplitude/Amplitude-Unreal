@@ -14,40 +14,6 @@ public class Amplitude : ModuleRules
     PublicDefinitions.Add("WITH_AMPLITUDE1");
     if (Target.Platform == UnrealTargetPlatform.Mac)
     {
-      // PrivateIncludePaths.AddRange(
-      //   new string[] {
-      //    Path.Combine(ModuleDirectory, "include")
-      //   }
-      // );
-      // PublicIncludePaths.AddRange(
-      //   new string[] {
-      //     Path.Combine(ModuleDirectory, "include")
-      //   }
-      // );
-      Log.TraceInformation(Path.Combine(ModuleDirectory, "include"));
-      
-      // PublicAdditionalFrameworks.Add(
-      //   Path.Combine(ThirdPartyPath, "iOS", "x86_64", "Amplitude.framework"
-      // ));
-      // Log.TraceInformation(Path.Combine(ThirdPartyPath, "Amplitude-iOS", "x86_64", "Amplitude.embeddedframework.zip"));
-      // Log.TraceInformation(Path.Combine(ThirdPartyPath, "Amplitude-iOS", "x86_64", "Headers"));
-      // RuntimeDependencies.Add(Path.Combine(ModuleDirectory, "lib/IOS/libdynamic.framework/libdynamic"), UnrealBuildTool.StagedFileType.SystemNonUFS);
-      // PublicSystemIncludePaths.AddRange(
-      //   new string[] {
-      //     Path.Combine(ThirdPartyPath, "Amplitude-iOS", "include")
-      //   }
-      // );
-      // PublicAdditionalFrameworks.Add(
-			// 	new Framework(
-			// 		"Amplitude",
-			// 		Path.Combine(ThirdPartyPath, "Amplitude-iOS", "x86_64", "Amplitude.embeddedframework.zip")
-      //     // "../Library/Amplitude-iOS/x86_64/Amplitude.embeddedframework.zip"
-			// 	)
-			// );
-      // PublicFrameworks.Add(Path.Combine(ThirdPartyPath, "Amplitude-iOS", "x86_64", "Amplitude.framework"));
-      // RuntimeDependencies.Add(Path.Combine(ThirdPartyPath, "Amplitude-iOS", "x86_64", "Amplitude.framework", "Amplitude"));
-      // PublicAdditionalLibraries.Add(Path.Combine(ThirdPartyPath, "lib", "libAmplitude_macOS_static_lib.a"));
-      // RuntimeDependencies.Add("$(PluginDir)/Source/ThirdParty/lib/libAmplitude_macOS_static_lib.a");
       PublicDependencyModuleNames.AddRange(
         new string[]
         {
