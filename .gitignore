@@ -26,6 +26,7 @@
 *.la
 *.a
 *.lib
+!/Source/ThirdParty/lib/libAmplitude_macOS_static_lib.a
 
 # Executables
 *.exe
