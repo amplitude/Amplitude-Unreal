@@ -11,7 +11,7 @@ public class Amplitude : ModuleRules
     string ThirdPartyPath = Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty"));
     Log.TraceInformation("In Amplitude.Build.cs");
     Log.TraceInformation(ThirdPartyPath);
-    PublicDefinitions.Add("WITH_AMPLITUDE1");
+    PublicDefinitions.Add("WITH_AMPLITUDE=1");
     if (Target.Platform == UnrealTargetPlatform.Mac)
     {
       PublicDependencyModuleNames.AddRange(
