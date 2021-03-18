@@ -42,7 +42,7 @@ namespace ios_bridge {
 
   std::string AmplitudeiOSBridge::getUserId()
   {
-    NSString* userId = [[Amplitude instance] getUserId:convert(userId)];
+    NSString* userId = [Amplitude instance].userId;
     return std::string([userId UTF8String]);
   }
 }
