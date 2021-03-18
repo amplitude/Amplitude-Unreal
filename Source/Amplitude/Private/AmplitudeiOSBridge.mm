@@ -57,5 +57,9 @@ namespace ios_bridge {
     [Amplitude instance].libraryName = convert(libraryName);
   }
 
+  void AmplitudeiOSBridge::uploadEvents()
+  {
+    [[Amplitude instance] uploadEvents];
+  }
 }
 #endif
