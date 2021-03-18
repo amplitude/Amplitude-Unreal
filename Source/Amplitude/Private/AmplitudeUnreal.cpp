@@ -91,7 +91,7 @@ void FAmplitudeProvider::SetUserID(const FString &InUserID)
 #endif
 }
 
-FString FAmplitudeProvider::GetUserID()
+FString FAmplitudeProvider::GetUserID() const
 {
 #if PLATFORM_APPLE
   ios_bridge::AmplitudeiOSBridge Bridge;

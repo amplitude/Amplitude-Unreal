@@ -1,35 +1,33 @@
 {
-	"FileVersion": 3,
-	"Version": 1,
-	"VersionName": "1.0",
-	"FriendlyName": "Amplitude",
-	"Description": "",
-	"Category": "Analytics",
-	"CreatedBy": "Amplitude Inc",
-	"CreatedByURL": "",
-	"DocsURL": "",
-	"MarketplaceURL": "",
-	"SupportURL": "",
-	"CanContainContent": false,
-	"IsBetaVersion": true,
-	"IsExperimentalVersion": false,
-	"Installed": false,
-	"Modules" :
-	[
-		{
-			"Name" : "AmplitudeEditor",
-			"Type" : "Editor",
-			"LoadingPhase" : "Default"
-		},
-		{
-			"Name" : "Amplitude",
-			"Type" : "Runtime",
-			"LoadingPhase" : "PreDefault",
-			"WhitelistPlatforms" :
-			[
-				"IOS",
+  "FileVersion": 3,
+  "Version": 1,
+  "VersionName": "1.0",
+  "FriendlyName": "Amplitude",
+  "Description": "",
+  "Category": "Analytics",
+  "CreatedBy": "Amplitude Inc",
+  "CreatedByURL": "",
+  "DocsURL": "",
+  "MarketplaceURL": "",
+  "SupportURL": "",
+  "CanContainContent": false,
+  "IsBetaVersion": true,
+  "IsExperimentalVersion": false,
+  "Installed": false,
+  "Modules": [
+    {
+      "Name": "AmplitudeEditor",
+      "Type": "Editor",
+      "LoadingPhase": "Default"
+    },
+    {
+      "Name": "Amplitude",
+      "Type": "Runtime",
+      "LoadingPhase": "PreDefault",
+      "WhitelistPlatforms": [
+        "IOS",
         "Mac"
-			]
-		}
-	]
+      ]
+    }
+  ]
 }

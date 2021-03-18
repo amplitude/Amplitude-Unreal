@@ -8,23 +8,21 @@ public class Amplitude : ModuleRules
   public Amplitude(ReadOnlyTargetRules Target) : base(Target)
   {
     PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
-    string LibraryPath = Path.GetFullPath(Path.Combine(ModuleDirectory, "../Library"));
+    string ThirdPartyPath = Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty"));
     Log.TraceInformation("In Amplitude.Build.cs");
-    Log.TraceInformation(LibraryPath);
-    Log.TraceInformation(ModuleDirectory);
+    Log.TraceInformation(ThirdPartyPath);
+    PublicDefinitions.Add("WITH_AMPLITUDE=1");
     if (Target.Platform == UnrealTargetPlatform.Mac)
     {
-      PrivateIncludePaths.AddRange(
-        new string[] {
-          Path.Combine(LibraryPath, "iOS", "x86_64", "Amplitude.framework", "Headers")
-        }
-      );
-      PublicIncludePaths.AddRange(
-        new string[] {
-          Path.Combine(LibraryPath, "iOS", "x86_64", "Amplitude.framework", "Headers")
-        }
-      );
-      PublicFrameworks.Add(Path.Combine(LibraryPath, "iOS", "x86_64", "Amplitude.framework"));
+      PrivateDependencyModuleNames.Add("AmplitudeMacOS");
+    }
+    else if (Target.Platform == UnrealTargetPlatform.IOS)
+    {
+      PrivateDependencyModuleNames.Add("AmplitudeIOS");
+    }
+    else if (Target.Platform == UnrealTargetPlatform.TVOS)
+    {
+      PrivateDependencyModuleNames.Add("AmplitudeTVOS");
     }
     else
     {
@@ -33,12 +31,13 @@ public class Amplitude : ModuleRules
 
     PrivateIncludePaths.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "Private")));
     PrivateIncludePaths.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "Public")));
-    PublicIncludePaths.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "Public")));
 
     PublicDependencyModuleNames.AddRange(
       new string[]
       {
         "Core",
+        "CoreUObject",
+        "Engine",
       }
       );
 
