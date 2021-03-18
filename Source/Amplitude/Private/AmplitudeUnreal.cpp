@@ -97,6 +97,10 @@ bool FAmplitudeProvider::SetSessionID(const FString &InSessionID)
 
 void FAmplitudeProvider::FlushEvents()
 {
+#if PLATFORM_APPLE
+  ios_bridge::AmplitudeiOSBridge Bridge;
+  Bridge.uploadEvents();
+#endif
 }
 
 void FAmplitudeProvider::SetUserID(const FString &InUserID)

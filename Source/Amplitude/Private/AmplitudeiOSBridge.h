@@ -24,7 +24,7 @@ namespace ios_bridge
     long getSessionId();
     void setSessionId(const long &sessionId);
     void setLibrary(const std::string &libraryName);
-    // AmplitudeiOSBridge instance();
+    void uploadEvents();
     // private:
     // AmplitudeImpl *impl;
   };
