@@ -15,23 +15,10 @@ namespace ios_bridge {
   //   Amplitude *wrapped;
   // };
 
-  // Amplitude::Amplitude() :
-  // impl(new AmplitudeiOSBridge())
-  // {
-    // [[Amplitude instance] initializeApiKey:@"bf4d2fcdda37e4ceb78bdde77ac3b153"];
-    // impl->wrapped = [[Amplitude alloc] init];
-  // }
-
-
   NSString* convert(const std::string& str)
   {
     return [NSString stringWithUTF8String:str.c_str()];
   }
-
-    // void initializeApiKey(std::string& apiKey)
-    // {
-    //   [::Amplitude initializeApiKey:convert(apiKey)];
-    // }
 
   void AmplitudeiOSBridge::initializeApiKey(const std::string& apiKey)
   {
@@ -52,13 +39,16 @@ namespace ios_bridge {
   {
     [[Amplitude instance] logEvent:convert(eventName)];
   }
-    // void logEvent()
-    // {
 
-    // }
-    // static Amplitude instance()
-    // {
+  void AmplitudeiOSBridge::setUserId(const std::string& userId)
+  {
+    [[Amplitude instance] setUserId:convert(userId)];
+  }
 
-    // }
+  std::string AmplitudeiOSBridge::getUserId()
+  {
+    NSString* userId = [[Amplitude instance] getUserId:convert(userId)];
+    return std::string([userId UTF8String]);
+  }
 }
 #endif
