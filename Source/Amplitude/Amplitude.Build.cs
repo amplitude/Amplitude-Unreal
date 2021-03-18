@@ -14,12 +14,15 @@ public class Amplitude : ModuleRules
     PublicDefinitions.Add("WITH_AMPLITUDE=1");
     if (Target.Platform == UnrealTargetPlatform.Mac)
     {
-      PublicDependencyModuleNames.AddRange(
-        new string[]
-        {
-          "AmplitudeIOS"
-        }
-      );
+      PrivateDependencyModuleNames.Add("AmplitudeMacOS");
+    }
+    else if (Target.Platform == UnrealTargetPlatform.IOS)
+    {
+      PrivateDependencyModuleNames.Add("AmplitudeIOS");
+    }
+    else if (Target.Platform == UnrealTargetPlatform.TVOS)
+    {
+      PrivateDependencyModuleNames.Add("AmplitudeTVOS");
     }
     else
     {
@@ -28,7 +31,6 @@ public class Amplitude : ModuleRules
 
     PrivateIncludePaths.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "Private")));
     PrivateIncludePaths.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "Public")));
-    PublicIncludePaths.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "Public")));
 
     PublicDependencyModuleNames.AddRange(
       new string[]

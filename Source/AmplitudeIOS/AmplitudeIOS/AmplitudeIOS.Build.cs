@@ -8,6 +8,7 @@ public class AmplitudeIOS : ModuleRules
 	public AmplitudeIOS(ReadOnlyTargetRules Target) : base(Target)
 	{
 		Type = ModuleType.External;
-    PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "x64", "libAmplitude_macOS_static_lib.a"));
+    PublicIncludePaths.Add(Path.Combine(ModuleDirectory, "include"));
+    PublicAdditionalLibraries.Add(Path.Combine(ModuleDirectory, "arm64", "Amplitude_iOS_Unreal.a"));
 	}
 }
