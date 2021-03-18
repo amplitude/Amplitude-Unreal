@@ -26,7 +26,9 @@
 *.la
 *.a
 *.lib
-!/Source/ThirdParty/lib/libAmplitude_macOS_static_lib.a
+!/Source/AmplitudeIOS/AmplitudeIOS/arm64/Amplitude_iOS_Unreal.a
+!/Source/AmplitudeIOS/AmplitudeMacOS/x64/Amplitude_macOS_Unreal.a
+!/Source/AmplitudeIOS/AmplitudeTvOS/arm64/Amplitude_tvOS_Unreal.a
 
 # Executables
 *.exe
