@@ -7,12 +7,24 @@ Maybe could use some helper functions
 #import "Amplitude.h" // iOS header
 #import <Foundation/Foundation.h>
 #include <string>
+#include <utility>
+#include <vector>
 
 namespace ios_bridge {
 
   NSString* convert(const std::string& str)
   {
     return [NSString stringWithUTF8String:str.c_str()];
+  }
+
+  NSMutableDictionary* convert(const std::vector<std::pair<std::string, std::string>> &propertyPairs)
+  {
+    NSMutableDictionary* userProperties = [NSMutableDictionary dictionary];
+    for (const auto& propValuePair: propertyPairs) {
+     [userProperties setValue:convert(propValuePair.first) forKey:convert(propValuePair.second)];
+    }
+
+    return userProperties;
   }
 
   void AmplitudeiOSBridge::initializeApiKey(const std::string& apiKey)
@@ -30,6 +42,31 @@ namespace ios_bridge {
     [[Amplitude instance] logEvent:convert(eventName)];
   }
 
+  void AmplitudeiOSBridge::logEvent(const std::string& eventType)
+  {
+    [[Amplitude instance] logEvent:convert(eventType)];
+  }
+
+  void AmplitudeiOSBridge::logEvent(const std::string &eventType, const std::vector<std::pair<std::string, std::string>> &propertyPairs)
+  {
+    NSMutableDictionary *eventProperties = convert(propertyPairs);
+    [[Amplitude instance] logEvent:convert(eventType) withEventProperties:eventProperties];
+  }
+
+  void AmplitudeiOSBridge::setUserProperties(const std::vector<std::pair<std::string, std::string>> &propertyPairs)
+  {
+    NSMutableDictionary *userProperties = convert(propertyPairs);
+    [[Amplitude instance] setUserProperties:userProperties];
+  }
+
+  void AmplitudeiOSBridge::setUserProperty(const std::string &propertyName, std::string &propertyValue)
+  {
+    std::vector<std::pair<std::string, std::string>> propertyPairs;
+    std::pair <std::string,std::string> propertyPair (propertyName, propertyValue);
+    propertyPairs.push_back(propertyPair);
+    setUserProperties(propertyPairs);
+  }
+  
   std::string AmplitudeiOSBridge::getUserId()
   {
     NSString* userId = [Amplitude instance].userId;

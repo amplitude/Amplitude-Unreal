@@ -61,11 +61,20 @@ void FAmplitudeProvider::EndSession()
 
 void FAmplitudeProvider::RecordEvent(const FString &EventName, const TArray<FAnalyticsEventAttribute> &Attributes)
 {
+  std::string ConvertedEventName = std::string(TCHAR_TO_UTF8(*EventName));
+  std::vector<std::pair<std::string, std::string>> propertyPairs;
+  for (FAnalyticsEventAttribute Attribute : Attributes)
+  {
+    std::pair<std::string, std::string> propertyPair;
+    propertyPair.first = std::string(TCHAR_TO_UTF8(*Attribute.AttrName));
+    propertyPair.second = std::string(TCHAR_TO_UTF8(*Attribute.AttrValueString));
+    propertyPairs.push_back(propertyPair);
+  }
+
 #if PLATFORM_APPLE
   ios_bridge::AmplitudeiOSBridge Bridge;
-  std::string ConvertedEventName = std::string(TCHAR_TO_UTF8(*EventName));
   UE_LOG(LogAnalytics, Display, TEXT("[Amplitude Event] %s"), *EventName);
-  Bridge.logEvent(ConvertedEventName);
+  Bridge.logEvent(ConvertedEventName, propertyPairs);
 #endif
 }
 
@@ -120,4 +129,25 @@ FString FAmplitudeProvider::GetUserID() const
   return BridgedUserId;
 #endif
   return TEXT("NO-OP");
+}
+
+void FAmplitudeProvider::SetUserProperty(const FString &Property, const FString &Value)
+{
+  std::string ConvertedProperty = std::string(TCHAR_TO_UTF8(*Property));
+  std::string ConvertedValue = std::string(TCHAR_TO_UTF8(*Value));
+
+#if PLATFORM_APPLE
+  ios_bridge::AmplitudeiOSBridge Bridge;
+  Bridge.setUserProperty(ConvertedProperty, ConvertedValue);
+#endif
+}
+
+void FAmplitudeProvider::SetLocation(const FString &InLocation)
+{
+  SetUserProperty(TEXT("Location"), InLocation);
+}
+
+void FAmplitudeProvider::SetGender(const FString &InGender)
+{
+  SetUserProperty(TEXT("Location"), InGender);
 }
