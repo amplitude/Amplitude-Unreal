@@ -7,6 +7,8 @@ Maybe could use some helper functions
 #import "Amplitude.h" // iOS header
 #import <Foundation/Foundation.h>
 #include <string>
+#include <utility>
+#include <vector>
 
 namespace ios_bridge {
 
@@ -30,9 +32,19 @@ namespace ios_bridge {
     [Amplitude instance].libraryName = convert(libraryName);
   }
 
-  void AmplitudeiOSBridge::logEvent(const std::string& eventName)
+  void AmplitudeiOSBridge::logEvent(const std::string& eventType)
   {
-    [[Amplitude instance] logEvent:convert(eventName)];
+    [[Amplitude instance] logEvent:convert(eventType)];
+  }
+
+  void AmplitudeiOSBridge::logEvent(const std::string &eventType, const std::vector<std::pair<std::string, std::string>> &propertyPairs)
+  {
+    NSMutableDictionary *eventProperties = [NSMutableDictionary dictionary];
+    // Range based for
+    for(const auto& propValuePair: propertyPairs) {
+     [eventProperties setValue:convert(propValuePair.first) forKey:convert(propValuePair.second)];
+    }
+    [[Amplitude instance] logEvent:convert(eventType) withEventProperties:eventProperties];
   }
 
   void AmplitudeiOSBridge::setUserId(const std::string& userId)

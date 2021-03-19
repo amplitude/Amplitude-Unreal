@@ -6,7 +6,8 @@ The "bridge" class. All methods should defer to respective methods of objc file 
 Maybe could use some helper functions
 */
 #include <string>
-
+#include <utility>
+#include <vector>
 namespace ios_bridge
 {
   // struct AmplitudeImpl;
@@ -16,9 +17,12 @@ namespace ios_bridge
   public:
     // AmplitudeiOSBridge(const std::string s);
     // ~AmplitudeiOSBridge();
-    void initializeApiKey(const std::string &eventName);
-    void initializeApiKey(const std::string &eventName, const std::string &userId);
-    void logEvent(const std::string &eventName);
+    void initializeApiKey(const std::string &apiKey);
+    void initializeApiKey(const std::string &apiKey, const std::string &userId);
+
+    void logEvent(const std::string &eventType);
+    void logEvent(const std::string &eventType, const std::vector<std::pair<std::string, std::string>> &propertyPairs);
+
     void setUserId(const std::string &userId);
     std::string getUserId();
     void setLibrary(const std::string &libraryName);

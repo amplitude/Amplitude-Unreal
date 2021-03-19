@@ -60,11 +60,20 @@ void FAmplitudeProvider::EndSession()
 
 void FAmplitudeProvider::RecordEvent(const FString &EventName, const TArray<FAnalyticsEventAttribute> &Attributes)
 {
+  std::string ConvertedEventName = std::string(TCHAR_TO_UTF8(*EventName));
+  std::vector<std::pair<std::string, std::string>> propertyPairs;
+  for (FAnalyticsEventAttribute Attribute : Attributes)
+  {
+    std::pair<std::string, std::string> propertyPair;
+    propertyPair.first = std::string(TCHAR_TO_UTF8(*Attribute.AttrName));
+    propertyPair.second = std::string(TCHAR_TO_UTF8(*Attribute.AttrValueString));
+    propertyPairs.push_back(propertyPair);
+  }
+
 #if PLATFORM_APPLE
   ios_bridge::AmplitudeiOSBridge Bridge;
-  std::string ConvertedEventName = std::string(TCHAR_TO_UTF8(*EventName));
   UE_LOG(LogAnalytics, Display, TEXT("[Amplitude Event] %s"), *EventName);
-  Bridge.logEvent(ConvertedEventName);
+  Bridge.logEvent(ConvertedEventName, propertyPairs);
 #endif
 }
 
