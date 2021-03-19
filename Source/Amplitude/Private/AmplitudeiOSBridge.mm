@@ -25,14 +25,15 @@ namespace ios_bridge {
     [[Amplitude instance] initializeApiKey:convert(apiKey) userId:convert(userId)];
   }
 
-  void AmplitudeiOSBridge::setLibrary(const std::string& libraryName)
-  {
-    [Amplitude instance].libraryName = convert(libraryName);
-  }
-
   void AmplitudeiOSBridge::logEvent(const std::string& eventName)
   {
     [[Amplitude instance] logEvent:convert(eventName)];
+  }
+
+  std::string AmplitudeiOSBridge::getUserId()
+  {
+    NSString* userId = [Amplitude instance].userId;
+    return std::string([userId UTF8String]);
   }
 
   void AmplitudeiOSBridge::setUserId(const std::string& userId)
@@ -40,10 +41,25 @@ namespace ios_bridge {
     [[Amplitude instance] setUserId:convert(userId)];
   }
 
-  std::string AmplitudeiOSBridge::getUserId()
+  long AmplitudeiOSBridge::getSessionId()
   {
-    NSString* userId = [Amplitude instance].userId;
-    return std::string([userId UTF8String]);
+    return [[Amplitude instance] getSessionId];
+  }
+
+  void AmplitudeiOSBridge::setSessionId(const long& sessionId)
+  {
+    [[Amplitude instance] setSessionId:sessionId];
+  }
+
+
+  void AmplitudeiOSBridge::setLibrary(const std::string& libraryName)
+  {
+    [Amplitude instance].libraryName = convert(libraryName);
+  }
+
+  void AmplitudeiOSBridge::uploadEvents()
+  {
+    [[Amplitude instance] uploadEvents];
   }
 }
 #endif
