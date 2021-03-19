@@ -109,3 +109,24 @@ FString FAmplitudeProvider::GetUserID() const
 #endif
   return TEXT("NO-OP");
 }
+
+void FAmplitudeProvider::SetUserProperty(const FString &Property, const FString &Value)
+{
+  std::string ConvertedProperty = std::string(TCHAR_TO_UTF8(*Property));
+  std::string ConvertedValue = std::string(TCHAR_TO_UTF8(*Value));
+
+#if PLATFORM_APPLE
+  ios_bridge::AmplitudeiOSBridge Bridge;
+  Bridge.setUserProperty(ConvertedProperty, ConvertedValue);
+#endif
+}
+
+void FAmplitudeProvider::SetLocation(const FString &InLocation)
+{
+  SetUserProperty(TEXT("Location"), InLocation);
+}
+
+void FAmplitudeProvider::SetGender(const FString &InGender)
+{
+  SetUserProperty(TEXT("Location"), InGender);
+}

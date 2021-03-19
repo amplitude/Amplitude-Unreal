@@ -17,6 +17,16 @@ namespace ios_bridge {
     return [NSString stringWithUTF8String:str.c_str()];
   }
 
+  NSMutableDictionary* convert(const std::vector<std::pair<std::string, std::string>> &propertyPairs)
+  {
+    NSMutableDictionary* userProperties = [NSMutableDictionary dictionary];
+    for (const auto& propValuePair: propertyPairs) {
+     [userProperties setValue:convert(propValuePair.first) forKey:convert(propValuePair.second)];
+    }
+
+    return userProperties;
+  }
+
   void AmplitudeiOSBridge::initializeApiKey(const std::string& apiKey)
   {
     [[Amplitude instance] initializeApiKey:convert(apiKey)];
@@ -39,12 +49,22 @@ namespace ios_bridge {
 
   void AmplitudeiOSBridge::logEvent(const std::string &eventType, const std::vector<std::pair<std::string, std::string>> &propertyPairs)
   {
-    NSMutableDictionary *eventProperties = [NSMutableDictionary dictionary];
-    // Range based for
-    for(const auto& propValuePair: propertyPairs) {
-     [eventProperties setValue:convert(propValuePair.first) forKey:convert(propValuePair.second)];
-    }
+    NSMutableDictionary *eventProperties = convert(propertyPairs);
     [[Amplitude instance] logEvent:convert(eventType) withEventProperties:eventProperties];
+  }
+
+  void AmplitudeiOSBridge::setUserProperties(const std::vector<std::pair<std::string, std::string>> &propertyPairs)
+  {
+    NSMutableDictionary *userProperties = convert(propertyPairs);
+    [[Amplitude instance] setUserProperties:userProperties];
+  }
+
+  void AmplitudeiOSBridge::setUserProperty(const std::string &propertyName, std::string &propertyValue)
+  {
+    std::vector<std::pair<std::string, std::string>> propertyPairs;
+    std::pair <std::string,std::string> propertyPair (propertyName, propertyValue);
+    propertyPairs.push_back(propertyPair);
+    setUserProperties(propertyPairs);
   }
 
   void AmplitudeiOSBridge::setUserId(const std::string& userId)

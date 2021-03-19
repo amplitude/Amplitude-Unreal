@@ -22,6 +22,8 @@ namespace ios_bridge
 
     void logEvent(const std::string &eventType);
     void logEvent(const std::string &eventType, const std::vector<std::pair<std::string, std::string>> &propertyPairs);
+    void setUserProperty(const std::string &propertyName, std::string &propertyValue);
+    void setUserProperties(const std::vector<std::pair<std::string, std::string>> &propertyPairs);
 
     void setUserId(const std::string &userId);
     std::string getUserId();

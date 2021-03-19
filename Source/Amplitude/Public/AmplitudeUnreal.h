@@ -34,7 +34,7 @@ public:
   /**
 	 * IAnalyticsProviderModule interface.
 	 * Creates the analytics provider given a configuration delegate.
-	 * The keys required exactly match the field names in the Config object. 
+	 * The keys required exactly match the field names in the Config object.
 	 */
   virtual TSharedPtr<IAnalyticsProvider> CreateAnalyticsProvider(const FAnalyticsProviderConfigurationDelegate &GetConfigValue) const override;
 
