@@ -25,12 +25,14 @@ namespace ios_bridge
     void setUserProperty(const std::string &propertyName, std::string &propertyValue);
     void setUserProperties(const std::vector<std::pair<std::string, std::string>> &propertyPairs);
 
-    void setUserId(const std::string &userId);
     std::string getUserId();
+    void setUserId(const std::string &userId);
+
+    long getSessionId();
+    void setSessionId(const long &sessionId);
+
     void setLibrary(const std::string &libraryName);
-    // AmplitudeiOSBridge instance();
-    // NSString* convert(const std::string s)
-    // void testEventSend();
+    void uploadEvents();
     // private:
     // AmplitudeImpl *impl;
   };

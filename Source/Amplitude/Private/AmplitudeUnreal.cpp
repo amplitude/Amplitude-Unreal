@@ -1,6 +1,7 @@
 #include "AmplitudeUnreal.h"
 #include "AmplitudeProvider.h"
 #include "Analytics.h"
+#include <exception>
 #if PLATFORM_APPLE
 #include "AmplitudeiOSBridge.h"
 #endif
@@ -79,24 +80,44 @@ void FAmplitudeProvider::RecordEvent(const FString &EventName, const TArray<FAna
 
 FString FAmplitudeProvider::GetSessionID() const
 {
-  return TEXT("NO-OP");
+#if PLATFORM_APPLE
+  ios_bridge::AmplitudeiOSBridge Bridge;
+  FString SessionId = FString::SanitizeFloat(Bridge.getSessionId());
+  return SessionId;
+#endif
 }
 
 bool FAmplitudeProvider::SetSessionID(const FString &InSessionID)
 {
-  return true;
+  try
+  {
+#if PLATFORM_APPLE
+    ios_bridge::AmplitudeiOSBridge Bridge;
+    long ConvertedSessionId = std::stoi(std::string(TCHAR_TO_UTF8(*InSessionID)));
+    Bridge.setSessionId(ConvertedSessionId);
+#endif
+    return true;
+  }
+  catch (std::exception &e)
+  {
+    return false;
+  }
 }
 
 void FAmplitudeProvider::FlushEvents()
 {
+#if PLATFORM_APPLE
+  ios_bridge::AmplitudeiOSBridge Bridge;
+  Bridge.uploadEvents();
+#endif
 }
 
 void FAmplitudeProvider::SetUserID(const FString &InUserID)
 {
 #if PLATFORM_APPLE
   ios_bridge::AmplitudeiOSBridge Bridge;
-  std::string ConvertedUserName = std::string(TCHAR_TO_UTF8(*InUserID));
-  Bridge.setUserId(ConvertedUserName);
+  std::string ConvertedUserId = std::string(TCHAR_TO_UTF8(*InUserID));
+  Bridge.setUserId(ConvertedUserId);
 #endif
 }
 
@@ -104,8 +125,8 @@ FString FAmplitudeProvider::GetUserID() const
 {
 #if PLATFORM_APPLE
   ios_bridge::AmplitudeiOSBridge Bridge;
-  FString userId = Bridge.getUserId().c_str();
-  return userId;
+  FString BridgedUserId = Bridge.getUserId().c_str();
+  return BridgedUserId;
 #endif
   return TEXT("NO-OP");
 }

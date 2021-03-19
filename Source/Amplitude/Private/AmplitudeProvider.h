@@ -43,8 +43,8 @@ public:
   virtual FString GetSessionID() const override;
   virtual bool SetSessionID(const FString &InSessionID) override;
 
-  virtual void SetUserID(const FString &InUserID) override;
   virtual FString GetUserID() const override;
+  virtual void SetUserID(const FString &InUserID) override;
 
   virtual void SetUserProperty(const FString &Property, const FString &Value);
   void SetLocation(const FString &InLocation) override;
