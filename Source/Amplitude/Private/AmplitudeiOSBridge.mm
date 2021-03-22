@@ -37,10 +37,6 @@ namespace ios_bridge {
     [[Amplitude instance] initializeApiKey:convert(apiKey) userId:convert(userId)];
   }
 
-  void AmplitudeiOSBridge::logEvent(const std::string& eventName)
-  {
-    [[Amplitude instance] logEvent:convert(eventName)];
-  }
 
   void AmplitudeiOSBridge::logEvent(const std::string& eventType)
   {
