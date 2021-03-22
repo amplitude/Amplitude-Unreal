@@ -149,5 +149,5 @@ void FAmplitudeProvider::SetLocation(const FString &InLocation)
 
 void FAmplitudeProvider::SetGender(const FString &InGender)
 {
-  SetUserProperty(TEXT("Location"), InGender);
+  SetUserProperty(TEXT("Gender"), InGender);
 }

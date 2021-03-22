@@ -21,7 +21,7 @@ namespace ios_bridge {
   {
     NSMutableDictionary* userProperties = [NSMutableDictionary dictionary];
     for (const auto& propValuePair: propertyPairs) {
-     [userProperties setValue:convert(propValuePair.first) forKey:convert(propValuePair.second)];
+     [userProperties setValue:convert(propValuePair.second) forKey:convert(propValuePair.first)];
     }
 
     return userProperties;
@@ -36,7 +36,6 @@ namespace ios_bridge {
   {
     [[Amplitude instance] initializeApiKey:convert(apiKey) userId:convert(userId)];
   }
-
 
   void AmplitudeiOSBridge::logEvent(const std::string& eventType)
   {
