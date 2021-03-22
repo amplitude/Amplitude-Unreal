@@ -18,16 +18,15 @@ public class AmplitudeEditor : ModuleRules
 			new string[] {
 				"Core",
 				"CoreUObject",
-                "Analytics",
-                "AnalyticsVisualEditing",
-                "Engine",
+        "Analytics",
+        "AnalyticsVisualEditing",
+        "Engine",
 				"Projects"
 			}
 			);
 
 		PrivateIncludePathModuleNames.AddRange(
-			new string[]
-            {
+			new string[] {
 				"Settings"
 			}
 		);
