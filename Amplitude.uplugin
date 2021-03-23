@@ -26,8 +26,7 @@
       "LoadingPhase": "PreDefault",
       "WhitelistPlatforms": [
         "IOS",
-        "Mac",
-        "TVOS"
+        "Mac"
       ]
     }
   ]
