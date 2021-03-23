@@ -9,30 +9,30 @@
 
 UCLASS()
 class UAmplitudeSettings
-	: public UAnalyticsSettingsBase
+    : public UAnalyticsSettingsBase
 {
-	GENERATED_UCLASS_BODY()
+  GENERATED_UCLASS_BODY()
 
-	UPROPERTY(EditAnywhere, Category=Amplitude, meta=(ConfigRestartRequired=true))
-	FString ReleaseApiKey;
+  UPROPERTY(EditAnywhere, Category = Amplitude, meta = (ConfigRestartRequired = true))
+  FString ReleaseApiKey;
 
-	UPROPERTY(EditAnywhere, Category=Amplitude, meta=(ConfigRestartRequired=true))
-	FString DebugApiKey;
+  UPROPERTY(EditAnywhere, Category = Amplitude, meta = (ConfigRestartRequired = true))
+  FString DebugApiKey;
 
-	UPROPERTY(EditAnywhere, Category=Amplitude, meta=(ConfigRestartRequired=true))
-	FString TestApiKey;
+  UPROPERTY(EditAnywhere, Category = Amplitude, meta = (ConfigRestartRequired = true))
+  FString TestApiKey;
 
-	UPROPERTY(EditAnywhere, Category=Amplitude, meta=(ConfigRestartRequired=true))
-	FString DevelopmentApiKey;
+  UPROPERTY(EditAnywhere, Category = Amplitude, meta = (ConfigRestartRequired = true))
+  FString DevelopmentApiKey;
 
-// UAnalyticsSettingsBase interface
+  // UAnalyticsSettingsBase interface
 protected:
-	/**
+  /**
 	 * Provides a mechanism to read the section based information into this UObject's properties
 	 */
-	virtual void ReadConfigSettings();
-	/**
+  virtual void ReadConfigSettings();
+  /**
 	 * Provides a mechanism to save this object's properties to the section based ini values
 	 */
-	virtual void WriteConfigSettings();
+  virtual void WriteConfigSettings();
 };
