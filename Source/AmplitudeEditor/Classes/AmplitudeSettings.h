@@ -25,7 +25,6 @@ class UAmplitudeSettings
   UPROPERTY(EditAnywhere, Category = Amplitude, meta = (ConfigRestartRequired = true))
   FString DevelopmentApiKey;
 
-  // UAnalyticsSettingsBase interface
 protected:
   /**
 	 * Provides a mechanism to read the section based information into this UObject's properties

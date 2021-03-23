@@ -10,13 +10,10 @@ Maybe could use some helper functions
 #include <vector>
 namespace ios_bridge
 {
-  // struct AmplitudeImpl;
 
   class AmplitudeiOSBridge
   {
   public:
-    // AmplitudeiOSBridge(const std::string s);
-    // ~AmplitudeiOSBridge();
     void initializeApiKey(const std::string &apiKey);
     void initializeApiKey(const std::string &apiKey, const std::string &userId);
 
@@ -33,8 +30,6 @@ namespace ios_bridge
 
     void setLibrary(const std::string &libraryName);
     void uploadEvents();
-    // private:
-    // AmplitudeImpl *impl;
   };
 }
 #endif
