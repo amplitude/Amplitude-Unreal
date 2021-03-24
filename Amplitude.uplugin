@@ -1,7 +1,7 @@
 {
   "FileVersion": 3,
   "Version": 1,
-  "VersionName": "0.0.2",
+  "VersionName": "0.1.0",
   "FriendlyName": "Amplitude",
   "Description": "Integrates Amplitude into Unreal Engine games",
   "Category": "Analytics",
