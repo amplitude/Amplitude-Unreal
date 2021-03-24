@@ -151,3 +151,8 @@ void FAmplitudeProvider::SetGender(const FString &InGender)
 {
   SetUserProperty(TEXT("Gender"), InGender);
 }
+
+void FAmplitudeProvider::SetAge(const int32 InAge)
+{
+  SetUserProperty(TEXT("Age"), FString::FromInt(InAge));
+}
