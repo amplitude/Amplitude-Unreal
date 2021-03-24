@@ -28,7 +28,7 @@ source code from GitHub (4.9 or higher) is required for this.
 - If you are new to programming in UE4, please see the Epic's [Programming Guide](https://docs.unrealengine.com/latest/INT/Programming/index.html)! 
 - Hot Reload: Source code updates should be compiled before reflecting in the editor. Thus, you should do: Window -> Developer Tools -> Modules -> Search `Amplitude` -> Recompile -> Reload. Otherwise, you'll need to restart your UE4Editor
 - VSCode Development: By default, UE4 selects XCode as your editor
-- Unreal Engine Source Code: Unreal's source code is open source, but you must [https://www.unrealengine.com/en-US/ue4-on-github](link your Epic account to Github)
+- Unreal Engine Source Code: Unreal's source code is open source, but you must [link your Epic account to Github](https://www.unrealengine.com/en-US/ue4-on-github).
 
 ## Client Usage
 
