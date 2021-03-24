@@ -49,4 +49,5 @@ public:
   virtual void SetUserProperty(const FString &Property, const FString &Value);
   void SetLocation(const FString &InLocation) override;
   void SetGender(const FString &InGender) override;
+  void SetAge(const int32 InAge) override;
 };
