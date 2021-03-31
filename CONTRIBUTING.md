@@ -1,3 +1,14 @@
+# Good Development Resources
+
+- [Introduction to UE4 Plugins](https://wiki.unrealengine.com/An_Introduction_to_UE4_Plugins)
+- [MacOS Setup Guide](https://github.com/botman99/ue4-xcode-vscode-mac)
+- Newcomers to UE4 programming should refer to [Epic's Programming Guide](https://docs.unrealengine.com/latest/INT/Programming/index.html)! 
+- Hot Reload: Source code updates should be compiled before reflecting in the editor. Thus, you should do: Window -> Developer Tools -> Modules -> Search `Amplitude` -> Recompile -> Reload. Otherwise, you'll need to restart your UE4Editor
+- VSCode Development: By default, UE4 selects XCode as your editor
+- Unreal Engine Source Code: Unreal's source code is open source, but you must [link your Epic account to Github](https://www.unrealengine.com/en-US/ue4-on-github).
+
+# Release Process
+
 ### PR Commit Title Conventions
 
 PR titles should follow [conventional commit standards](https://www.conventionalcommits.org/en/v1.0.0/). This helps automate the [release](#release) process.
