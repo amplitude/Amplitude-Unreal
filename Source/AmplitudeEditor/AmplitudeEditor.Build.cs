@@ -3,7 +3,6 @@
 using UnrealBuildTool;
 using System.IO;
 using System;
-using Tools.DotNETCommon;
 
 public class AmplitudeEditor : ModuleRules
 {
@@ -21,7 +20,8 @@ public class AmplitudeEditor : ModuleRules
         "Analytics",
         "AnalyticsVisualEditing",
         "Engine",
-        "Projects"
+        "Projects",
+        "DeveloperSettings"
       }
       );
 

@@ -1,7 +1,6 @@
 using UnrealBuildTool;
 using System.IO;
 using System;
-using Tools.DotNETCommon;
 
 public class Amplitude : ModuleRules
 {
