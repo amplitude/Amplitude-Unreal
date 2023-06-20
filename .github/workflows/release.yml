@@ -11,26 +11,25 @@ on:
 jobs:
   authorize:
     name: Authorize
-    runs-on: macos-10.15
+    runs-on: ubuntu-latest
     steps:
       - name: ${{ github.actor }} permission check to do a release
-        uses: octokit/request-action@v2.0.0
+        uses: 'lannonbr/repo-permission-check-action@2.0.2'
         with:
-          route: GET /repos/:repository/collaborators/${{ github.actor }}
-          repository: ${{ github.repository }}
+          permission: 'write'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   release:
     name: Release
     needs: [authorize]
-    runs-on: macos-10.15
+    runs-on: macos-12
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
 
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: 14.x
 
