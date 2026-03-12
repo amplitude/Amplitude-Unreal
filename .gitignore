@@ -82,6 +82,7 @@ DerivedDataCache/*
 
 # General
 .DS_Store
+node_modules/
 .AppleDouble
 .LSOverride
 
@@ -106,4 +107,3 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-
