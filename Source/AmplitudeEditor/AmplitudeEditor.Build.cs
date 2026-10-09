@@ -3,13 +3,16 @@
 using UnrealBuildTool;
 using System.IO;
 using System;
-using Tools.DotNETCommon;
 
 public class AmplitudeEditor : ModuleRules
 {
   public AmplitudeEditor(ReadOnlyTargetRules Target) : base(Target)
   {
-    // PrivateIncludePaths.Add("AmplitudeEditor/Private");
+    // UE5 compatibility settings
+    PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
+    // CppStandard = CppStandardVersion.Cpp20;
+    
+    // Include paths
     PrivateIncludePaths.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "Private")));
     PrivateIncludePaths.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "Public")));
     PublicIncludePaths.Add(Path.GetFullPath(Path.Combine(ModuleDirectory, "Public")));
@@ -21,9 +24,16 @@ public class AmplitudeEditor : ModuleRules
         "Analytics",
         "AnalyticsVisualEditing",
         "Engine",
-        "Projects"
+        "Projects",
+        "Slate",
+        "SlateCore",
+        "EditorStyle",
+        "EditorWidgets",
+        "UnrealEd",
+        "WorkspaceMenuStructure",
+        "DeveloperSettings"
       }
-      );
+    );
 
     PrivateIncludePathModuleNames.AddRange(
       new string[] {
