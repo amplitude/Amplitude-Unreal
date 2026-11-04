@@ -1,15 +1,18 @@
 using UnrealBuildTool;
 using System.IO;
 using System;
-using Tools.DotNETCommon;
 
 public class Amplitude : ModuleRules
 {
   public Amplitude(ReadOnlyTargetRules Target) : base(Target)
   {
+    // UE5 compatibility settings
     PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
+    // CppStandard = CppStandardVersion.Cpp20;
+    
     string ThirdPartyPath = Path.GetFullPath(Path.Combine(ModuleDirectory, "../ThirdParty"));
     PublicDefinitions.Add("WITH_AMPLITUDE=1");
+    
     if (Target.Platform == UnrealTargetPlatform.Mac)
     {
       PrivateDependencyModuleNames.Add("AmplitudeMacOS");
@@ -34,8 +37,7 @@ public class Amplitude : ModuleRules
         "CoreUObject",
         "Engine",
       }
-      );
-
+    );
 
     PrivateDependencyModuleNames.AddRange(
       new string[]

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Containers/UnrealString.h"
+#include "CoreMinimal.h"
 #include "Interfaces/IAnalyticsProvider.h"
 #include <string>
 
@@ -50,4 +50,13 @@ public:
   void SetLocation(const FString &InLocation) override;
   void SetGender(const FString &InGender) override;
   void SetAge(const int32 InAge) override;
+
+  virtual void SetDefaultEventAttributes(TArray<FAnalyticsEventAttribute>&& Attributes) override;
+  virtual TArray<FAnalyticsEventAttribute> GetDefaultEventAttributesSafe() const override;
+  virtual int32 GetDefaultEventAttributeCount() const override;
+  virtual FAnalyticsEventAttribute GetDefaultEventAttribute(int AttributeIndex) const override;
+
+private:
+  /** Array of default event attributes */
+  TArray<FAnalyticsEventAttribute> DefaultEventAttributes;
 };
