@@ -1,7 +1,6 @@
 #include "AmplitudeUnreal.h"
 #include "AmplitudeProvider.h"
 #include "Analytics.h"
-#include <exception>
 #if PLATFORM_APPLE
 #include "AmplitudeiOSBridge.h"
 #endif
@@ -63,11 +62,22 @@ void FAmplitudeProvider::RecordEvent(const FString &EventName, const TArray<FAna
 {
   std::string ConvertedEventName = std::string(TCHAR_TO_UTF8(*EventName));
   std::vector<std::pair<std::string, std::string>> propertyPairs;
-  for (FAnalyticsEventAttribute Attribute : Attributes)
+  
+  // Add default attributes first
+  for (const FAnalyticsEventAttribute& DefaultAttribute : DefaultEventAttributes)
   {
     std::pair<std::string, std::string> propertyPair;
-    propertyPair.first = std::string(TCHAR_TO_UTF8(*Attribute.AttrName));
-    propertyPair.second = std::string(TCHAR_TO_UTF8(*Attribute.AttrValueString));
+    propertyPair.first = std::string(TCHAR_TO_UTF8(*DefaultAttribute.GetName()));
+    propertyPair.second = std::string(TCHAR_TO_UTF8(*DefaultAttribute.GetValue()));
+    propertyPairs.push_back(propertyPair);
+  }
+  
+  // Add event-specific attributes
+  for (const FAnalyticsEventAttribute& Attribute : Attributes)
+  {
+    std::pair<std::string, std::string> propertyPair;
+    propertyPair.first = std::string(TCHAR_TO_UTF8(*Attribute.GetName()));
+    propertyPair.second = std::string(TCHAR_TO_UTF8(*Attribute.GetValue()));
     propertyPairs.push_back(propertyPair);
   }
 
@@ -85,23 +95,25 @@ FString FAmplitudeProvider::GetSessionID() const
   FString SessionId = FString::SanitizeFloat(Bridge.getSessionId());
   return SessionId;
 #endif
+  return TEXT("-1");
 }
 
 bool FAmplitudeProvider::SetSessionID(const FString &InSessionID)
 {
-  try
+  // Use Unreal's string conversion instead of std::stoi to avoid exceptions
+  if (InSessionID.IsNumeric())
   {
 #if PLATFORM_APPLE
     ios_bridge::AmplitudeiOSBridge Bridge;
-    long ConvertedSessionId = std::stoi(std::string(TCHAR_TO_UTF8(*InSessionID)));
+    long ConvertedSessionId = FCString::Atoi64(*InSessionID);
     Bridge.setSessionId(ConvertedSessionId);
 #endif
     return true;
   }
-  catch (std::exception &e)
-  {
-    return false;
-  }
+  
+  // Log error and return false if the session ID is not numeric
+  UE_LOG(LogAnalytics, Warning, TEXT("SetSessionID failed: Invalid session ID format: %s"), *InSessionID);
+  return false;
 }
 
 void FAmplitudeProvider::FlushEvents()
@@ -155,4 +167,24 @@ void FAmplitudeProvider::SetGender(const FString &InGender)
 void FAmplitudeProvider::SetAge(const int32 InAge)
 {
   SetUserProperty(TEXT("Age"), FString::FromInt(InAge));
+}
+
+void FAmplitudeProvider::SetDefaultEventAttributes(TArray<FAnalyticsEventAttribute>&& Attributes)
+{
+  DefaultEventAttributes = MoveTemp(Attributes);
+}
+
+TArray<FAnalyticsEventAttribute> FAmplitudeProvider::GetDefaultEventAttributesSafe() const
+{
+  return DefaultEventAttributes;
+}
+
+int32 FAmplitudeProvider::GetDefaultEventAttributeCount() const
+{
+  return DefaultEventAttributes.Num();
+}
+
+FAnalyticsEventAttribute FAmplitudeProvider::GetDefaultEventAttribute(int AttributeIndex) const
+{
+  return DefaultEventAttributes[AttributeIndex];
 }

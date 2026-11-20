@@ -24,9 +24,10 @@
       "Name": "Amplitude",
       "Type": "Runtime",
       "LoadingPhase": "PreDefault",
-      "WhitelistPlatforms": [
+      "SupportedTargetPlatforms": [
         "IOS",
-        "Mac"
+        "Mac",
+        "TVOS"
       ]
     }
   ]
